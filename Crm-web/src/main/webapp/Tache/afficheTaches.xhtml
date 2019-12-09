@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+		<title>Afficher Tache</title>
+	</head>
+	<h:panelGroup columns="2">
+		<h:form>
+			<h:dataTable value="#{tacheBean.taches}" var="tache" border="1">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nom" />
+					</f:facet>
+					<h:outputText value="#{tache.nom}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date Debut" />
+					</f:facet>
+					<h:outputText value="#{tache.dateDebut}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date Fin" />
+					</f:facet>
+					<h:outputText value="#{tache.dateFin}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="delete" />
+					</f:facet>
+					<h:commandButton action="#{tacheBean.deleteTache(tache.id)}" value="Supprimer"  />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{tacheBean.modifier(tache)}"
+						value="Modifier" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{tacheBean.affecterTacheAressource(tache)}"
+						value="Modifier" />
+				</h:column>
+				
+			</h:dataTable>
+		</h:form>
+	</h:panelGroup>
+</ui:composition>

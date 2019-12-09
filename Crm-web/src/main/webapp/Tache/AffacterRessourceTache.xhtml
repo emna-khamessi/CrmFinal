@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+<title>Afficher Agents</title>
+	</head>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Nom" />
+			<h:inputText value="#{tacheBean.nom}" />
+			<td style="margin-right: 70px"><h:selectOneMenu value="#{tacheBean.idressource}">
+					<f:selectItem itemValue="#{null}" itemLabel="Select..." />
+					<f:selectItems value="#{ressourceBean.ressources}" var="ressource"
+						itemValue="#{ressource.id}" itemLabel="#{ressource.nom}"/>
+				</h:selectOneMenu></td>
+
+			<h:commandButton action="#{tacheBean.affectation()}"
+				value="Affectter" />
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

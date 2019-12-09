@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/Front/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+
+	<ui:define name="content">
+		<h:panelGroup>
+
+		
+
+
+			<h:form>
+				<div class="about-box-main">
+					<div class="container">
+
+						<div class="row my-5">
+							<ui:repeat value="#{userBeans.rdvs}" var="rdv">
+								<div class="col-sm-6 col-lg-4">
+									<div class="service-block-inner">
+										<h3>
+											<h:outputLabel value="waiting" rendered="#{rdv.etat == 0}" />
+											<h:outputLabel value="Appointment accepted"
+												rendered="#{rdv.etat == 1}" />
+											<h:outputLabel value="Appointment refused"
+												rendered="#{rdv.etat == -1}" />
+										</h3>
+										<p>
+											<h:link value="#{rdv.description}" outcome="rdv">
+											</h:link>
+										</p>
+										<p>
+											<h:link
+												value="#{rdv.storeBean.title} - #{rdv.storeBean.location}"
+												outcome="rdv">
+											</h:link>
+										</p>
+										<p>
+											<h:outputText value="#{rdv.date}">
+												<f:convertDateTime pattern="dd-MM-yyyy - HH:mm" />
+											</h:outputText>
+										</p>
+										<p></p>
+										<p><h:commandButton class="btn btn-primary "
+																value="Modifier" action="#{userBeans.displayRdv(rdv)}">
+																<f:param name="id" value="#{rdv}" />
+															</h:commandButton>   -------
+													<h:commandButton class="btn btn-primary "
+																value="Supprimer"
+																action="#{userBeans.deleteRdv(rdv.id)}">
+																<f:param name="id" value="#{rdv.id}" />
+															</h:commandButton></p>
+									</div>
+								</div>
+
+							</ui:repeat>
+						</div>
+
+					</div>
+				</div>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

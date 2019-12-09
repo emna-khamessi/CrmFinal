@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+		<title>Afficher Tache</title>
+	</head>
+	<h:form>
+	<h:panelGrid columns="2">
+		<h:outputText value="Nom" />
+		<h:inputText value="#{tacheBean.nom}" />
+
+		<h:outputText value="Date Debut" />
+		<h:message for="StartDate" style="color:red"></h:message>
+		<h:inputText id="StartDate" value="#{tacheBean.dateDebut}"
+			required="true"
+			requiredMessage="you need to type in a date example: 10-10-2010">
+			<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+		</h:inputText>
+
+		<h:outputText value="Date Fin" />
+		<h:message for="EndDate" style="color:red"></h:message>
+		<h:inputText id="EndDate" value="#{tacheBean.dateFin}"
+			requiredMessage="you need to type in a date example: 11-10-2010"
+			required="true">
+			<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+		</h:inputText>
+
+		<h:commandButton action="#{tacheBean.mettreAjourTache()}" value="Mettre a jour tache"/>
+	</h:panelGrid>
+</h:form>
+</ui:composition>

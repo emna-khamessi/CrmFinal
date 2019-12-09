@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+<title>Afficher Agents</title>
+	</head>
+	<h:panelGroup columns="2">
+		<h:form>
+			<h:dataTable value="#{agentBean.agents}" var="agent" border="1">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nom" />
+					</f:facet>
+					<h:outputText value="#{agent.nom}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Prenom" />
+					</f:facet>
+					<h:outputText value="#{agent.prenom}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email" />
+					</f:facet>
+					<h:outputText value="#{agent.email}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Status" />
+					</f:facet>
+					<h:outputText value="#{agent.status}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="delete" />
+					</f:facet>
+					<h:commandButton action="#{agentBean.deleteAgent(agent.id)}"
+						value="Supprimer" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{agentBean.modifier(agent)}"
+						value="Modifier" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{agentBean.affecterTacheAagent(agent)}"
+						value="Modifier" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{agentBean.affecterPosAagent(agent)}"
+						value="Modifier" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Update" />
+					</f:facet>
+					<h:commandButton action="#{agentBean.affecterPosalesAagent(agent)}"
+						value="Modifier1" />
+				</h:column>
+				
+
+			</h:dataTable>
+		</h:form>
+	</h:panelGroup>
+
+	
+</ui:composition>

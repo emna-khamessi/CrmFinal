@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="addCompany" />
+
+<ui:define name="content">
+
+
+<h:form id="form">
+
+<h:panelGrid columns="2">
+
+<h:outputText value="ClientName"></h:outputText>
+<h:inputText value="#{AviBean.clientId}"></h:inputText>
+
+<h:outputText value="comm"></h:outputText>
+<h:inputTextarea value="#{AviBean.comm}"></h:inputTextarea>
+
+<h:outputText value="date"></h:outputText>
+<h:inputTextarea value="#{AviBean.date}"></h:inputTextarea>
+
+
+<h:outputText value="score"></h:outputText>
+<h:inputTextarea value="#{AviBean.score}"></h:inputTextarea>
+
+
+
+<h:commandButton value="Mettre A jour Employé" action="#{AviBean.mettreAjourAvi()}" />
+<h:commandButton action="#{AviBean.addAvi()}" value="add Avis" />
+<h:commandButton action="#{AviBean.getAvis()}" value="Avis List" />
+</h:panelGrid>
+</h:form>
+<h:message for="btn"/>
+
+</ui:define>
+
+</ui:composition>

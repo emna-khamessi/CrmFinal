@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Front/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+
+<ui:define name="content">
+<h:panelGroup>
+
+   
+
+
+
+
+
+
+<h:form>
+
+<br></br><br></br><br></br>
+
+			<div class="col-lg-8 col-sm-12" style="left: 150px;">
+				<div class="contact-form-right">
+					<h2 style="color: #007bff">Edit Your Appointment</h2>
+				<br></br><br></br>
+					<h:form >
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									 <h:inputText class="form-control" rows="4"
+										data-error="Write your message" value="#{userBeans.rdv.description}" 
+									          size="20" required="true"
+									          label="Description" >
+									        </h:inputText>
+									<div class="help-block with-errors"><ul class="list-unstyled"><li>Please update reason</li></ul></div>
+								<br></br>
+								</div>
+							</div><br></br>
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:inputText class="form-control" rows="4"
+										data-error="Write your message" id="date" value="#{userBeans.date}" 
+								          size="20" required="true"
+								          label="Receipt Date" >
+								          <f:convertDateTime pattern="d-M-yyyy HH:mm" />
+								        </h:inputText>
+		<div class="help-block with-errors"><ul class="list-unstyled"><li>dd-mm-yyyy   hh:mm</li></ul></div>
+									
+									
+									<h:message for="date" style="color:red" />
+								
+								</div><br></br>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:selectOneMenu class="form-control" rows="4"
+										data-error="Write your message" value="#{userBeans.store.storeId}">
+											<f:selectItem itemValue="#{null}" itemLabel="Select..." />
+											<f:selectItems value="#{userBeans.stores}" var="store"
+												itemValue="#{store.storeId}" itemLabel="#{store.title} - #{store.location}" />
+										</h:selectOneMenu>
+	<div class="help-block with-errors"><ul class="list-unstyled"><li>Please chose store</li></ul></div>
+
+								</div>
+							</div><br></br><br></br>
+							<div class="col-md-12"><br></br>
+
+								<div class="submit-button text-center">
+							<h:commandButton class="btn btn-primary "
+											value="Update Appointment"
+											action="#{userBeans.editRdv()}">
+										</h:commandButton>
+							
+									<div id="msgSubmit" class="h3 text-center hidden"></div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>

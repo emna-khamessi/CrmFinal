@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+<title>Afficher Agents</title>
+	</head>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Nom" />
+			<h:inputText value="#{agentBean.nom}" />
+
+			<h:outputText value="Prenom" />
+			<h:inputText value="#{agentBean.prenom}" />
+
+			<h:outputText value="Email" />
+			<h:inputText value="#{agentBean.email}" />
+
+			<h:outputText value="Numero Téléphone" />
+			<h:inputText value="#{agentBean.numTel}" />
+			
+			<h:outputText value="Numero Téléphone" />
+			<h:inputText value="#{agentBean.idMission}" />
+
+			<td style="margin-right: 70px"><h:selectOneMenu>
+					<f:selectItem itemValue="#{null}" itemLabel="Select..." />
+					<f:selectItems value="#{tacheBean.taches}" var="tache"
+						itemValue="#{tache.id}" itemLabel="#{tache.nom}"/>
+				</h:selectOneMenu></td>
+
+			<h:commandButton action="#{agentBean.addAgent()}"
+				value="Ajouter Agent" />
+			<h:commandButton action="#{agentBean.mettreAjourAgent()}"
+				value="Mettre a jour agent" />
+			<h:commandButton action="#{agentBean.AffecterTacheAAgent()}"
+				value="fsdfsdf" />
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

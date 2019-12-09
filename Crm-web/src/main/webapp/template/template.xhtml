@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>Welcome</title>
+<script>
+	addEventListener("load", function() {
+		setTimeout(hideURLbar, 0);
+	}, false);
+
+	function hideURLbar() {
+		window.scrollTo(0, 1);
+	}
+</script>
+<!-- //Meta Tags -->
+
+<!-- Style-sheets -->
+<!-- Bootstrap Css -->
+<link href="../resources/css/bootstrap.css" rel="stylesheet"
+	type="text/css" media="all"></link>
+<!-- Bootstrap Css -->
+<!-- Common Css -->
+<link href="../resources/css/style.css" rel="stylesheet" type="text/css"
+	media="all"></link>
+
+<!--// Common Css -->
+<!-- Nav Css -->
+<link rel="stylesheet" href="../resources/css/style4.css"></link>
+<!--// Nav Css -->
+<!-- Fontawesome Css -->
+<link href="../resources/css/fontawesome-all.css" rel="stylesheet"></link>
+<!--// Fontawesome Css -->
+<!--// Style-sheets -->
+</head>
+<body>
+	<ui:include src="../template/header.xhtml" />
+	<ui:insert name="menu" />
+	<ui:insert name="content" />
+	<ui:include src="../template/footer.xhtml" />
+	<!--web-fonts-->
+	<link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"/>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+	<!--//web-fonts-->
+	<!-- Required common Js -->
+	<script src="../resources/js/jquery-2.2.3.min.js"></script>
+	<!-- //Required common Js -->
+
+	<!-- Sidebar-nav Js -->
+	<script>
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+			});
+		});
+	</script>
+	<!--// Sidebar-nav Js -->
+
+	<!-- dropdown nav -->
+	<script>
+		$(document).ready(function() {
+			$(".dropdown").hover(function() {
+				$('.dropdown-menu', this).stop(true, true).slideDown("fast");
+				$(this).toggleClass('open');
+			}, function() {
+				$('.dropdown-menu', this).stop(true, true).slideUp("fast");
+				$(this).toggleClass('open');
+			});
+		});
+	</script>
+	<!-- //dropdown nav -->
+
+	<!-- Js for bootstrap working-->
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<!-- //Js for bootstrap working -->
+</body>
+</html>

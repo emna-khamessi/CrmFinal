@@ -1,0 +1,199 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Front/template.xhtml">
+
+
+<ui:param name="page_name" value="Accueil" />
+
+<ui:define name="content">
+<h:panelGroup>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></link>
+
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row new-account-login">
+            <div class="col-sm-6 col-lg-6 mb-3">
+                <div class="title-left">
+                    <h3>Account Login</h3>
+                </div>
+                <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
+                <h:form id="formLogin">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="InputEmail" class="mb-0">Email Address</label>
+                            
+                            <h:inputText type="text" value="#{userBeans.email}" class="form-control" placeholder="Enter Email"></h:inputText>
+                        </div>
+                 	<div class="form-group col-md-6">
+                            <label for="InputPassword" class="mb-0">Password</label>
+                            <h:inputSecret type="text" value="#{userBeans.password}" class="form-control" ></h:inputSecret>
+                        </div>
+                    </div>
+                    <div id="divError" class="alert alert-danger">
+                        <label class="lError" id="lError" style="display:none"></label>
+                    </div>
+               <h:commandButton value="Login" class="btn hvr-hover" action="#{userBeans.login()}" />
+    </h:form>
+				
+				
+				
+            </div>
+          
+<h:form enctype="multipart/form-data">
+
+<div class="col-sm-6 col-lg-6 mb-3">
+                <div class="title-left">
+                    <h3>Create New Account</h3>
+                </div>
+                
+                <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a></h5>
+
+                
+                 
+                  
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          
+
+               <h:outputText value="First Name"></h:outputText><br></br>
+  <h:inputText class="form-control" type="text" value="#{userBeans.firtname}"></h:inputText>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <h:outputText value="Last Name"></h:outputText><br></br>
+	<h:inputText class="form-control" type="text" value="#{userBeans.lastname}"></h:inputText>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <h:outputText value="Email"></h:outputText><br></br>
+	<h:inputText class="form-control" type="text" value="#{userBeans.email}"></h:inputText>
+                        </div>
+                        <div class="form-group col-md-6">
+                           <h:outputText value="Password"></h:outputText><br></br>
+	<h:inputSecret class="form-control" type="text" value="#{userBeans.password}"></h:inputSecret>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <h:outputText value="Confirm Password"></h:outputText><br></br>
+	<h:inputSecret class="form-control" type="text" value="#{userBeans.confirmpassword}"></h:inputSecret>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="editor-label">
+                               <h:outputText value="Upload Profile Image "></h:outputText><br></br>
+                            </div>
+                            <div class="editor-field">
+                              
+                     
+	                       <h:inputFile value="#{userBeans.uploadedFile}"  />
+                            </div>
+                        </div>
+                    </div><br></br>
+                    <div class="col-md-offset-2 col-md-10">
+					<h:commandButton value="Register" action="#{userBeans.register()}" class="btn hvr-hover"/>
+                        </div>
+
+                
+            </div>
+
+</h:form>
+
+    </div>
+        </div>
+    </div>
+
+
+
+<script>
+    (function ($) {
+        $("#divError").hide();
+
+        $('#Login').click(function (e) {
+            if ($('#InputEmail').val().trim() == "") {
+                alert('Email required');
+                return;
+            }
+            if ($('#InputPassword').val().trim() == "") {
+                alert('Password required');
+                return;
+            }
+            var loginmodel = {
+                "Email": $('#InputEmail').val(),
+                "Password": $('#InputPassword').val().trim(),
+            }
+            var Email = {
+                "Email": $('#InputEmail').val(),
+            }
+            $.ajax({
+                url: "/User/LoginCheck",
+                data: loginmodel,
+                dataType: "json",
+                type: 'POST',
+                success: function (Data) {
+                    if (Data.status == "notFound") {
+                        // alert('vous n etes pas inscrit');
+                        $("#lError").empty();
+                        $("#lError").append("vous n\'etes pas inscrit");
+                        $("#lError").show();
+                        $("#divError").show();
+                        return;
+                    }
+                    else if (Data.status == "invalidPassword") {
+                        $("#lError").empty();
+                        $("#lError").append("mot de passe incorecte");
+                        $("#lError").show();
+                        $("#divError").show();
+                        // alert('mot de passe incorecte');
+                        return;
+                    }
+                    else if (Data.status == "notConfirmed") {
+                        $("#lError").empty();
+                        $("#lError").append("votre compte n\'est pas confirmé");
+                        $("#lError").show();
+                        $("#divError").show();
+                        //alert('votre compte n\'est pas confirmé');
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: '/User/LoginResult',
+                            data: Email,
+                            dataType: 'json',
+                            type: 'POST',
+                            success: function (Data) {
+                                if (Data.status == "admin") {
+                                    window.location = "/User/Index/";
+                                }
+                                else {
+                                    window.location = "/Home/Index/";
+                                }
+                            },
+                            error: function (xhr) {
+                                alert("failed");
+                                alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                            }
+                        });
+                    }
+
+                },
+                error: function (xhr) {
+                    alert("failed");
+                    alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                }
+            });
+
+
+        });
+    })(jQuery);
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+
+
+</h:panelGroup>
+</ui:define>
+</ui:composition>

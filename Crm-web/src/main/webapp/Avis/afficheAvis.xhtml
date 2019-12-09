@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+
+<ui:define name="title"> choisir une fonctionalite: </ui:define> 
+<ui:define name="content">
+
+
+<h:panelGroup>
+
+<h:form>
+<h:outputText value="connected as: #{loginBean.getLogin()}" />
+
+<h:commandLink value="Déconnexion" action="#{loginBean.doLogout()}" />
+
+</h:form>
+
+
+
+
+
+<h:form>
+<h:dataTable value="#{AviBean.avis}" var="Avi" border="1">
+<h:column><f:facet name="header"><h:outputText value="clientId"/>
+</f:facet>
+<h:outputText value="#{Avi.clientId}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="comm"/>
+</f:facet>
+<h:outputText value="#{Avi.comm}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="date"/>
+</f:facet>
+<h:outputText value="#{Avi.date}" /></h:column>
+
+
+
+<h:column><f:facet name="header"><h:outputText value="score"/>
+</f:facet>
+<h:outputText value="#{Avi.score}" /></h:column>
+
+<h:column><f:facet name="header"><h:outputText value="reponse"/>
+</f:facet>
+<h:outputText value="#{Avi.reponse}" /></h:column>
+
+
+<h:column>
+<f:facet name="header"><h:outputText value="Action" /></f:facet>
+<h:commandButton action="#{AviBean.removeAvi(Avi.id)}"
+value="Supprimer" />
+<h:commandButton action="#{AviBean.modifier(Avi)}" value="Modifier" />
+</h:column>
+ 
+</h:dataTable>
+</h:form>
+
+
+<h:commandButton action="#{AviBean.mettreAjourAvi()}" value="Mettre a jour
+Avi" />
+
+
+
+<h:form>
+<h:commandLink value="new Avi" action="#{loginBean.addAvi()}" />
+</h:form>
+</h:panelGroup>
+
+
+</ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<f:metadata>
+    <f:viewAction action="#{userBeans.checkAdmin()}" />
+</f:metadata>
+
+<ui:define name="content">
+<h:panelGroup>
+
+   <br></br><br></br>
+<h:form>
+<h3> Users List</h3>
+ <br></br><br></br>
+<div class="limiter">
+				<div class="wrap-table100">
+					<div class="table100 ver1">
+						<table class="table table-hover table-striped table-vcenter">
+							<thead>
+								<tr>
+									<th>User</th>
+									<th>Store</th>
+									<th>Date</th>
+									<th>Description</th>
+									<th>etat</th>
+									<th>Action</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<ui:repeat value="#{userBeans.allRdvs}" var="rdv">
+
+									<tr>
+
+										<td><h:link value="#{rdv.user.firstName} #{rdv.user.lastName}" outcome="rdv">
+											</h:link></td>
+										
+										<td><h:link value="#{rdv.storeBean.title} - #{rdv.storeBean.location}" outcome="rdv">		
+											</h:link></td>
+											<td>
+										<h:outputText value="#{rdv.date}" >
+										    <f:convertDateTime pattern="dd-MM-yyyy - HH:mm" />
+										</h:outputText></td>
+										
+										<td><h:link value="#{rdv.description}" outcome="rdv">		
+											</h:link>
+										</td>
+										
+										<td>
+											<h:outputLabel value="En Attent" rendered="#{rdv.etat == 0}"/>	
+											<h:outputLabel value="Rendez-vous Accepter" rendered="#{rdv.etat == 1}"/>
+											<h:outputLabel value="Rendez-vous Refuser" rendered="#{rdv.etat == -1}"/>
+										</td>
+										
+										
+											<td>
+											
+											<h:commandButton class="btn btn-style my-2 my-sm-0"
+													value="Refuser"
+													rendered="#{rdv.etat == 0}"
+													action="#{userBeans.refuseRdv(rdv)}">
+													<f:param name="id" value="#{rdv}" />
+											</h:commandButton>
+												<span></span>
+											<h:commandButton class="btn btn-style my-2 my-sm-0"
+													value="Accepter"
+													rendered="#{rdv.etat == 0}"
+													action="#{userBeans.accepterRdv(rdv)}">
+													<f:param name="id" value="#{rdv}" />
+											</h:commandButton>
+											
+											
+											
+											<h:commandButton class="btn btn-style my-2 my-sm-0"
+													value="Refuser"
+													rendered="#{rdv.etat == 1}"
+													action="#{userBeans.refuseRdv(rdv)}">
+													<f:param name="id" value="#{rdv}" />
+											</h:commandButton>
+												
+											<h:commandButton class="btn btn-primary "
+													value="Accepter"
+													rendered="#{rdv.etat == -1}"
+													action="#{userBeans.accepterRdv(rdv)}">
+													<f:param name="id" value="#{rdv}" />
+											</h:commandButton>
+													
+										</td>
+										
+									</tr>
+								</ui:repeat>
+							</tbody>
+						</table>
+
+
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+   
+  <br></br><br></br> <br></br><br></br>
+</h:panelGroup>
+</ui:define>
+</ui:composition>

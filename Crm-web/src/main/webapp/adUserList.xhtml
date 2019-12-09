@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+
+<f:metadata>
+    <f:viewAction action="#{userBeans.checkAdmin()}" />
+</f:metadata>
+
+<ui:define name="content">
+<h:panelGroup>
+
+<h:form>
+<div class="limiter">
+				<div class="wrap-table100">
+					<div class="table100 ver1">
+						<table class="table table-hover table-striped table-vcenter">
+							<thead>
+								<tr>
+									<th>id</th>
+									<th>User Name</th>
+									<th>Email</th>
+									<th>Role</th>
+									<th>Etat</th>
+									<th>Action</th>
+										<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<ui:repeat value="#{userBeans.allUsers}" var="user">
+
+									<tr>
+
+											<td><h:link value="#{user.userId}" outcome="user">
+											</h:link></td>
+
+										<td><h:link value="#{user.firstName} #{user.lastName}" outcome="user">
+											</h:link></td>
+										
+										<td><h:link value="#{user.email}" outcome="user">		
+											</h:link></td>
+										<td>
+										<h:outputText value="#{user.role}"></h:outputText>
+										</td>
+										
+										<td>
+											<h:outputLabel value="Account Activated" rendered="#{user.etat == 1}"/>	
+											<h:outputLabel value="Account disabled" rendered="#{user.etat == 0}"/>
+										</td>
+										
+											<td>
+											
+											<h:commandButton class="btn btn-primary "
+													value="Activate"
+													rendered="#{user.etat == 0}"
+													action="#{userBeans.activeCompte(user)}">
+													<f:param name="userId" value="#{user}" />
+											</h:commandButton>
+												
+											<h:commandButton class="btn btn-style my-2 my-sm-0"
+													value="Desactivate"
+													rendered="#{user.etat == 1}"
+													action="#{userBeans.desactiveCompte(user)}">
+													<f:param name="userId" value="#{user}" />
+											</h:commandButton>
+											
+											<span></span>
+													</td>
+												<td>
+											<h:commandButton class="btn btn-primary "
+													value="Promote"
+													rendered="#{userBeans.checkRole(user) == false}"
+													action="#{userBeans.promoteUser(user)}">
+													<f:param name="userId" value="#{user}" />
+											</h:commandButton>
+												
+											<h:commandButton class="btn btn-style my-2 my-sm-0"
+													value="Depromote"
+													rendered="#{userBeans.checkRole(user) == true}"
+													action="#{userBeans.depromoteUser(user)}">
+													<f:param name="userId" value="#{user}"/>
+											</h:commandButton>
+													
+										</td>
+										
+									</tr>
+								</ui:repeat>
+							</tbody>
+						</table>
+
+
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+</h:panelGroup>
+</ui:define>
+</ui:composition>
